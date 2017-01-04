@@ -1,0 +1,17 @@
+bmcgehee/provision_ubuntu14_mysql5_7:
+  Env:
+    - CATALINA_HOME: "/usr/local/tomcat"
+    - JAVA_HOME: "/usr/lib/jvm/java-8-oracle"
+    - PATH: "$CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH"
+    - MYSQL_ROOT: "SetInDistelli"
+  Build:
+    - echo "Nothing to Build"
+  PreInstall:
+    - wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
+    - sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb
+    - sudo apt-get update
+    - 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT"'
+    - 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT"'
+    - sudo apt-get install mysql-server
+
+

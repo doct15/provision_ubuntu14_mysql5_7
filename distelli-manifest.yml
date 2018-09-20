@@ -6,7 +6,7 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - MYSQL_ROOT: "SetInDistelli"
     - DEBIAN_FRONTEND: "noninteractive"
   Build:
-    - echo "Nothing to Build"
+    - echo "Packaging up provisioning instructions for deployment"
   PreInstall:
     #- wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
     - wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb

@@ -4,7 +4,7 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - JAVA_HOME: "/usr/lib/jvm/java-8-oracle"
     - PATH: "$CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH"
     - MYSQL_ROOT: "SetInDistelli"
-    - DEBIAN_FRONTEND=noninteractive
+    - DEBIAN_FRONTEND: "noninteractive"
   Build:
     - echo "Nothing to Build"
   PreInstall:

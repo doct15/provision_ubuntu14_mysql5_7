@@ -7,11 +7,26 @@ bmcgehee/provision_ubuntu14_mysql5_7:
   Build:
     - echo "Nothing to Build"
   PreInstall:
-    - wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
-    - sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb
-    - sudo apt-get update
-    - 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT"'
-    - 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT"'
-    - sudo apt-get install mysql-server
+    #- wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
+    - wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
+    #- sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb
+    #- sudo apt-get update
+    #- 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT"'
+    #- 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/dmr-warning  note"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/unsupported-platform select  abort"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/select-server  select  mysql-5.7"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/tools-component  string"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/repo-url string  http://repo.mysql.com/apt/""'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/repo-codename  select  trusty"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/select-product select  Ok"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/select-preview select"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/preview-component  string"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/select-tools select"'
+    - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/repo-distro  select  ubuntu"'
+    - export DEBIAN_FRONTEND=noninteractive
+    - sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
+    - sudo apt-get -y update
+    - sudo apt-get -y install mysql-server
 
 

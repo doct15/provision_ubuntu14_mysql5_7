@@ -25,8 +25,10 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - 'sudo debconf-set-selections <<< "mysql-apt-config  mysql-apt-config/repo-distro  select  ubuntu"'
     - sudo -E dpkg -i mysql-apt-config_0.8.9-1_all.deb
     - sudo apt-get -y update
-    - 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT"'
-    - 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT"'
+    #- 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT"'
+    #- 'sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT"'
+    - 'sudo debconf-set-selections <<< "mysql-community-server	mysql-community-server/root-pass	password $MYSQL_ROOT"'
+    - 'sudo debconf-set-selections <<< "mysql-community-server	mysql-community-server/re-root-pass	password $MYSQL_ROOT"'
     - sudo apt-get -y install mysql-server
 
 

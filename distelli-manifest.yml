@@ -33,6 +33,7 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - sudo apt-get -y install mysql-server sed
     - 'sudo sed -i "s|bind-address\t= 127.0.0.1|bind-address = 0.0.0.0|g" /etc/mysql/mysql.conf.d/mysqld.cnf'
     - sudo service mysql restart
+    - sudo mysql -u root -p$MYSQL_ROOT --execute="GRANT ALL ON *.* to root IDENTIFIED BY \"$MYSQL_ROOT\";FLUSH PRIVILEGES;"
   PostStart:
     - publicip=$(curl -s ident.me) || true
     - privateip=$(hostname -I)

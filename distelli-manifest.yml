@@ -1,8 +1,5 @@
 bmcgehee/provision_ubuntu14_mysql5_7:
   Env:
-    - CATALINA_HOME: "/usr/local/tomcat"
-    - JAVA_HOME: "/usr/lib/jvm/java-8-oracle"
-    - PATH: "$CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH"
     - MYSQL_ROOT: "SetInDistelli"
     - DEBIAN_FRONTEND: "noninteractive"
     - PORT: "3306"

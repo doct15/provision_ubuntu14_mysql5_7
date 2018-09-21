@@ -5,6 +5,7 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - PATH: "$CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH"
     - MYSQL_ROOT: "SetInDistelli"
     - DEBIAN_FRONTEND: "noninteractive"
+    - PORT: "3306"
   Build:
     - echo "Packaging up provisioning instructions for deployment"
   PreInstall:
@@ -32,5 +33,12 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - sudo apt-get -y install mysql-server sed
     - 'sudo sed -i "s|bind-address\t= 127.0.0.1|bind-address = 0.0.0.0|g" /etc/mysql/mysql.conf.d/mysqld.cnf'
     - sudo service mysql restart
-
-
+  PostStart:
+    - publicip=$(curl -s ident.me) || true
+    - privateip=$(hostname -I)
+    - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
+    - 'echo "or maybe http://$privateip:$PORT"'
+    - START=$(cat $DISTELLI_TMP_FILENAME)
+    - rm "$DISTELLI_TMP_FILENAME"
+    - END=$(date +%s)
+    - echo $((END-START)) | awk '{printf " This deploy took %02d minutes and %02d seconds\n",int($1/60), int($1%60)}'

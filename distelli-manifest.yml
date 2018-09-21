@@ -3,9 +3,12 @@ bmcgehee/provision_ubuntu14_mysql5_7:
     - MYSQL_ROOT: "SetInPipelines"
     - DEBIAN_FRONTEND: "noninteractive"
     - PORT: "3306"
+    - DISTELLI_TMP_FILENAME: "$DISTELLI_INSTALLHOME/DISTELLI.$DISTELLI_BUILDNUM.$DISTELLI_RELVERSION.tmp"
   Build:
     - echo "Packaging up provisioning instructions for deployment"
   PreInstall:
+    - START=$(date +%s)
+    - echo "$START" > "$DISTELLI_TMP_FILENAME"
     #- wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
     - wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
     #- sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb

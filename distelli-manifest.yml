@@ -1,6 +1,6 @@
 bmcgehee/provision_ubuntu14_mysql5_7:
   Env:
-    - MYSQL_ROOT: "SetInDistelli"
+    - MYSQL_ROOT: "SetInPipelines"
     - DEBIAN_FRONTEND: "noninteractive"
     - PORT: "3306"
   Build:
